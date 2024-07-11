@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <title>Login and Sign-Up Forms</title>
+</head>
+<body>
+
+    <style>
+        body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.form-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+}
+
+.form-box h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.form-group label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  background: #fff;
+  padding: 0 5px;
+  color: #999;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.form-group input:focus + label,
+.form-group input:valid + label {
+  top: -5px;
+  left: 10px;
+  color: #007bff;
+  font-size: 12px;
+}
+
+.form-group button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-group button:hover {
+  background-color: #0056b3;
+}
+
+.form-group .form-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-group .form-link:hover {
+  text-decoration: underline;
+}
+
+.form-box p {
+  margin-top: 20px;
+}
+
+    </style>
+
+<div class="form-container">
+    <div class="form-box">
+      <h2>Login</h2>
+      <form>
+        <div class="form-group">
+          <input type="text" required="required">
+          <label>Username</label>
+        </div>
+        <div class="form-group">
+          <input type="password" required="required">
+          <label>Password</label>
+        </div>
+        <div class="form-group">
+          <button type="submit">Login</button>
+        </div>
+        <div class="form-group">
+          <a href="#" class="form-link">Forgot Password?</a>
+        </div>
+      </form>
+      <p>New user? <a href="#signup" class="form-link" id="showSignupForm">Sign up</a></p>
+    </div>
+  
+    <div class="form-box" id="signupForm" style="display:none;">
+      <h2>Sign Up</h2>
+      <form>
+        <div class="form-group">
+          <input type="text" required="required">
+          <label>Username</label>
+        </div>
+        <div class="form-group">
+          <input type="email" required="required">
+          <label>Email</label>
+        </div>
+        <div class="form-group">
+          <input type="password" required="required">
+          <label>Password</label>
+        </div>
+        <div class="form-group">
+          <button type="submit">Sign Up</button>
+        </div>
+      </form>
+      <p>Already have an account? <a href="#login" class="form-link" id="showLoginForm">Login</a></p>
+    </div>
+  </div>
+  
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    document.getElementById('showSignupForm').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('signupForm').style.display = 'block';
+      document.querySelector('.form-box').style.display = 'none';
+    });
+  
+    document.getElementById('showLoginForm').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('signupForm').style.display = 'none';
+      document.querySelector('.form-box').style.display = 'block';
+    });
+  </script>
+  </body>
+  </html>

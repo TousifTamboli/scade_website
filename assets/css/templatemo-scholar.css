@@ -1143,9 +1143,13 @@ Team Style
 --------------------------------------------- 
 */
 
+.margin-below{
+  margin-bottom: 7rem;
+}
+
 .team {
   margin-top: 100px;
-    padding-top: 140px;
+    padding-top: 80px;
 }
 
 .team-member {
