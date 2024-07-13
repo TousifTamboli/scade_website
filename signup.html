@@ -11,7 +11,7 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <title>Login Form</title>
+    <title>Signup Form</title>
 </head>
 <body>
 
@@ -24,16 +24,16 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                       <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                        SCADE Login
+                        SCADE Signup
                       </p>
   
-                      <form class="mx-1 mx-md-4" id="loginForm">
+                      <form class="mx-1 mx-md-4" id="signupForm">
                         <div class="d-flex flex-row align-items-center mb-4">
                           <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div class="form-outline flex-fill mb-0">
                             <input
                               type="email"
-                              id="login-email"
+                              id="email"
                               class="form-control"
                               placeholder="Your Email"
                               required
@@ -46,7 +46,7 @@
                           <div class="form-outline flex-fill mb-0">
                             <input
                               type="password"
-                              id="login-password"
+                              id="password"
                               class="form-control"
                               placeholder="Password"
                               required
@@ -59,49 +59,13 @@
                         >
                           <button
                             type="submit"
-                            id="login-submit"
+                            id="submit"
                             class="btn btn-primary btn-lg"
                           >
-                            Login
-                          </button>
-                        </div>
-
-                        <div class="text-center">
-                          <a href="#" id="forgot-password-link">Forgot Password?</a>
-                        </div>
-                      </form>
-
-                      <!-- Forgot Password Form -->
-                      <form class="mx-1 mx-md-4 mt-4 d-none" id="forgotPasswordForm">
-                        <p class="text-center h4 fw-bold mb-4 mx-1 mx-md-4 mt-4">
-                          Reset Password
-                        </p>
-                        <div class="d-flex flex-row align-items-center mb-4">
-                          <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                          <div class="form-outline flex-fill mb-0">
-                            <input
-                              type="email"
-                              id="forgot-email"
-                              class="form-control"
-                              placeholder="Your Email"
-                              required
-                            />
-                          </div>
-                        </div>
-  
-                        <div
-                          class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
-                        >
-                          <button
-                            type="submit"
-                            id="forgot-submit"
-                            class="btn btn-primary btn-lg"
-                          >
-                            Reset Password
+                            Submit
                           </button>
                         </div>
                       </form>
-
                     </div>
                     <div
                       class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
@@ -128,8 +92,9 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics.js";
-    import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
     import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js"; // Adjust for Realtime Database
+    
 
     // Firebase configuration
     const firebaseConfig = {
@@ -146,52 +111,22 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
     const auth = getAuth();
-    const db = getDatabase(app); // Initialize Realtime Database
+    const db = getDatabase(app); 
 
-    // Login form handling
-    const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', (e) => {
+    // Signup form handling
+    const signupForm = document.getElementById('signupForm');
+    signupForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-        signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Logged in successfully
+                // Signed up successfully
                 const user = userCredential.user;
-                alert('Login successful');
-                // You may want to redirect or show a success message
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorMessage);
-            });
-    });
+                alert('Signup successful');
 
-    // Forgot password handling
-    const forgotPasswordLink = document.getElementById('forgot-password-link');
-    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
-    const loginSection = document.querySelector('.vh-100 .container .row');
-
-    forgotPasswordLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        forgotPasswordForm.classList.remove('d-none');
-        loginForm.classList.add('d-none');
-    });
-
-    const forgotPasswordFormSubmit = document.getElementById('forgotPasswordForm');
-    forgotPasswordFormSubmit.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('forgot-email').value;
-
-        sendPasswordResetEmail(auth, email)
-            .then(() => {
-                alert('Password reset email sent');
-                forgotPasswordForm.classList.add('d-none');
-                loginForm.classList.remove('d-none');
-
-                window.location.href = 'index.html';
+                window.location.href = 'login.html';
             })
             .catch((error) => {
                 const errorCode = error.code;
