@@ -1590,6 +1590,21 @@ Contact Style
   color: #fff;
 }
 
+.new-button{
+  border: none;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #fff;
+    padding: 0px 25px;
+    border-radius: 25px;
+    color: #0A1766;
+    transition: all .4s;
+    position: relative;
+    z-index: 3;
+
+}
+
 #contact-form button {
   border: none;
   height: 50px;

@@ -115,9 +115,12 @@ https://templatemo.com/tm-586-scholar
                     Excellence.
                   </p>
                   <div class="buttons">
-                    <div class="main-button">
-                      <a href="#">Log Out</a>
-                    </div>
+                    <button
+                        class="new-button"
+                        id="logout"
+                      >
+                      Log out
+                      </button>
                   </div>
                 </div>
               </div>
@@ -717,8 +720,49 @@ https://templatemo.com/tm-586-scholar
       </div>
     </footer>
 
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
   
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCC7PCS8THdg5GKPqKl-w3FiB898NGal3s",
+        authDomain: "scade-website.firebaseapp.com",
+        projectId: "scade-website",
+        storageBucket: "scade-website.appspot.com",
+        messagingSenderId: "528561962338",
+        appId: "1:528561962338:web:317afbc9c42463f458803b",
+        measurementId: "G-4D3K51P8E3"
+      };
+  
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth();
+  
+      // Check user authentication
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          window.location.href = "login.html";
+        }
+      });
 
+
+    </script>
+
+
+<!-- Logout functionality -->
+    <script>
+      const logoutButton = document.getElementById("logout");
+
+      logoutButton.addEventListener("click", () => {
+        // Clear user session
+        sessionStorage.removeItem("user");
+        // Redirect to login page
+        window.location.href = "login.html";
+      });
+    </script>
+
+  
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
