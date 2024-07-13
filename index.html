@@ -749,9 +749,9 @@ https://templatemo.com/tm-586-scholar
 
       const userSession = sessionStorage.getItem("user");
 
-if (userSession) {
+      if (userSession) {
   console.log("User session found:");
-  console.log(JSON.parse(userSession));
+  // console.log(JSON.parse(userSession));
 } else {
   console.log("No user session found.");
   alert("Log out and Login again");
@@ -769,7 +769,7 @@ if (userSession) {
         sessionStorage.removeItem("user");
         // Redirect to login page
         window.location.href = "login.html";
-      });
+      }); 
     </script>
 
   

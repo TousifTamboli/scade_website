@@ -1,9 +1,11 @@
 
 const userSession = sessionStorage.getItem("user");
 
+
 if (userSession) {
   console.log("User session found:");
   console.log(JSON.parse(userSession));
 } else {
   console.log("No user session found.");
+  alert("Log out and Login again");
 }
