@@ -87,8 +87,6 @@ https://templatemo.com/tm-586-scholar
                 <li class="scroll-to-section">
                   <a href="#contact">Contact</a>
                 </li>
-                
-                </div>
               </ul>
               <a class="menu-trigger">
                 <span>Menu</span>
@@ -739,12 +737,7 @@ https://templatemo.com/tm-586-scholar
       const app = initializeApp(firebaseConfig);
       const auth = getAuth();
   
-      // Check user authentication
-      onAuthStateChanged(auth, (user) => {
-        if (!user) {
-          window.location.href = "login.html";
-        }
-      });
+      
 
 
       const userSession = sessionStorage.getItem("user");
@@ -755,6 +748,7 @@ https://templatemo.com/tm-586-scholar
 } else {
   console.log("No user session found.");
   alert("Log out and Login again");
+  window.location.href = 'login.html'
 }
 
     </script>
