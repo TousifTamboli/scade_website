@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <style>
+        .container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input, textarea, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+    </style>
+
+
+    <div class="container">
+        <h2>Add New Event</h2>
+        <form id="eventForm">
+            <label for="title">Event Title:</label>
+            <input type="text" id="title" name="title" required>
+            
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" required>
+            
+            <label for="date">Event Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="image">Event Image URL:</label>
+            <input type="url" id="image" name="image" required>
+            
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+            
+            <label for="type">Event Type:</label>
+            <select id="type" name="type" required>
+                <option value="past">Past Event</option>
+                <option value="future">Future Event</option>
+            </select>
+            
+            <button type="submit">Add Event</button>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const title = document.getElementById('title').value;
+    const category = document.getElementById('category').value;
+    const date = document.getElementById('date').value;
+    const image = document.getElementById('image').value;
+    const description = document.getElementById('description').value;
+    const type = document.getElementById('type').value;
+
+    const event = {
+        title,
+        category,
+        date,
+        image,
+        description,
+        type
+    };
+
+    fetch('http://localhost:3000/events', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(event)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Event added successfully');
+        // Optionally, clear the form fields
+        document.getElementById('eventForm').reset();
+    })
+    .catch(error => {
+        console.error('Error adding event:', error);
+        alert('Failed to add event');
+    });
+});
+
+    </script>
+
+    
+</body>
+</html>

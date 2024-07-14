@@ -262,66 +262,30 @@ https://templatemo.com/tm-586-scholar
 
     <section class="section courses" id="events">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <div class="section-heading">
-              <h6>Latest Events</h6>
-              <h2>Events</h2>
-            </div>
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <div class="section-heading">
+                      <h6>Latest Events</h6>
+                      <h2>Events</h2>
+                  </div>
+              </div>
           </div>
-        </div>
-        <ul class="event_filter">
-          <li>
-            <a class="is_active" href="#!" data-filter="*">Show All</a>
-          </li>
-          <li>
-            <a href="#!" data-filter=".past">Past Events</a>
-          </li>
-          <li>
-            <a href="#!" data-filter=".future">Future Events</a>
-          </li>
-          
-        </ul>
-
-        <div class="row event_box" style="position: relative; height: 727px;">
-          <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 past" style="position: absolute; left: 0px; top: 0px;">
-            <div class="events_item">
-              <div class="thumb">
-                <a href="#"><img src="assets/images/course-01.jpg" alt="">
-                <span class="category">Web Development</span>
-                <span class="price"><h6>View</h6></span>
-              </div>
-              <div class="down-content">
-                <span class="author">Past Event</span>
-                <h4>Learn Web Development</h4>
-              </div>
-            </a>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6  future" style="position: absolute; left: 320px; top: 0px;">
-            <div class="events_item">
-              <div class="thumb">
-                <a href="#"><img src="assets/images/course-02.jpg" alt="">
-                <span class="category">Data Science</span>
-                <span class="price"><h6>View</h6></span>
-              </div>
-              <div class="down-content">
-                <span class="author">Future Event</span>
-                <h4>Learn Ubuntu</h4>
-              </div>
-            </a>
-            </div>
-          </div>
-          
-          
-          
-          
-        </div>
-        
-        </div>
+          <ul class="event_filter">
+              <li>
+                  <a class="is_active" href="#!" data-filter="*">Show All</a>
+              </li>
+              <li>
+                  <a href="#!" data-filter=".past">Past Events</a>
+              </li>
+              <li>
+                  <a href="#!" data-filter=".future">Future Events</a>
+              </li>
+          </ul>
+  
+          <div class="row event_box" id="eventContainer"></div>
       </div>
-    </section>
+  </section>
+  
 
     
     </div>
@@ -737,9 +701,6 @@ https://templatemo.com/tm-586-scholar
       const app = initializeApp(firebaseConfig);
       const auth = getAuth();
   
-      
-
-
       const userSession = sessionStorage.getItem("user");
 
       if (userSession) {
@@ -765,6 +726,36 @@ https://templatemo.com/tm-586-scholar
         window.location.href = "login.html";
       }); 
     </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      fetch('http://your-backend-url.com/events')
+          .then(response => response.json())
+          .then(events => {
+              const eventContainer = document.getElementById('eventContainer');
+              events.forEach(event => {
+                  const eventItem = document.createElement('div');
+                  eventItem.className = `col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6 ${event.type}`;
+                  eventItem.innerHTML = `
+                      <div class="events_item">
+                          <div class="thumb">
+                              <a href="#"><img src="${event.image}" alt="">
+                              <span class="category">${event.category}</span>
+                              <span class="price"><h6>View</h6></span>
+                          </div>
+                          <div class="down-content">
+                              <span class="author">${event.type === 'past' ? 'Past Event' : 'Future Event'}</span>
+                              <h4>${event.title}</h4>
+                          </div>
+                      </a>
+                      </div>
+                  `;
+                  eventContainer.appendChild(eventItem);
+              });
+          })
+          .catch(error => console.error('Error fetching events:', error));
+  });
+  </script>
 
   
     <!-- Scripts -->
