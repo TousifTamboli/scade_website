@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <!-- <link rel="stylesheet" href="assets/css/form.css" /> -->
+    <title>Login Form</title>
+  </head>
+  <body>
+    <section class="vh-100" style="background-color: #eee">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-lg-12 col-xl-11">
+            <div class="card text-black" style="border-radius: 25px">
+              <div class="card-body p-md-5">
+                <div class="row justify-content-center">
+                  <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                      SCADE Login
+                    </p>
+                    <form class="mx-1 mx-md-4" id="loginForm">
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input
+                            type="email"
+                            id="login-email"
+                            class="form-control"
+                            placeholder="Your Email"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input
+                            type="password"
+                            id="login-password"
+                            class="form-control"
+                            placeholder="Password"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button
+                          type="submit"
+                          id="login-submit"
+                          class="btn btn-primary btn-lg"
+                        >
+                          Login
+                        </button>
+                      </div>
+                      <div class="text-center">
+                        <a href="#" id="forgot-password-link">Forgot Password?</a>
+                      </div>
+                      <div class="text-center">
+                        <a href="./signup.html" id="">Do not have account? </a>
+                      </div>
+                    </form>
+                    <form class="mx-1 mx-md-4 mt-4 d-none" id="forgotPasswordForm">
+                      <p class="text-center h4 fw-bold mb-4 mx-1 mx-md-4 mt-4">
+                        Reset Password
+                      </p>
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                          <input
+                            type="email"
+                            id="forgot-email"
+                            class="form-control"
+                            placeholder="Your Email"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button
+                          type="submit"
+                          id="forgot-submit"
+                          class="btn btn-primary btn-lg"
+                        >
+                          Reset Password
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                      class="img-fluid"
+                      alt="Sample image"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics.js";
+      import {
+        getAuth,
+        signInWithEmailAndPassword,
+        sendPasswordResetEmail,
+      } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCC7PCS8THdg5GKPqKl-w3FiB898NGal3s",
+        authDomain: "scade-website.firebaseapp.com",
+        projectId: "scade-website",
+        storageBucket: "scade-website.appspot.com",
+        messagingSenderId: "528561962338",
+        appId: "1:528561962338:web:317afbc9c42463f458803b",
+        measurementId: "G-4D3K51P8E3",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth();
+
+      // Login form handling
+      const loginForm = document.getElementById("loginForm");
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Logged in successfully
+            const user = userCredential.user;
+            alert("Login successful");
+            sessionStorage.setItem("user", JSON.stringify(user));
+            window.location.href = "index.html"; // Redirect to index.html after login
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            alert(errorMessage);
+          });
+      });
+
+      // Forgot password handling
+      const forgotPasswordLink = document.getElementById(
+        "forgot-password-link"
+      );
+      const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+
+      forgotPasswordLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        forgotPasswordForm.classList.remove("d-none");
+        loginForm.classList.add("d-none");
+      });
+
+      const forgotPasswordFormSubmit =
+        document.getElementById("forgotPasswordForm");
+      forgotPasswordFormSubmit.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("forgot-email").value;
+
+        sendPasswordResetEmail(auth, email)
+          .then(() => {
+            alert("Password reset email sent");
+            forgotPasswordForm.classList.add("d-none");
+            loginForm.classList.remove("d-none");
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            alert(errorMessage);
+          });
+      });
+
+      // Check if user is already logged in
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          window.location.href = "index.html"; // Redirect if user is already logged in
+        }
+      });
+    </script>
+  </body>
+</html>
