@@ -543,6 +543,7 @@ Header Style
   color: #fff;
 }
 
+
 .visible{
   display:inline !important;
 }
@@ -667,6 +668,14 @@ Banner Style
 */
 
 .main-banner {
+  background-image: url(../images/image.png);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 170px 0px 120px 0px;
+}
+
+.main-banner2 {
   background-image: url(../images/image.png);
   background-position: right bottom;
   background-repeat: no-repeat;
