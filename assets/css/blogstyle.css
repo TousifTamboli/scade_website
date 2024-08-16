@@ -1,4 +1,3 @@
-/* Styles for the image gallery */
 .body-blog {
     display: flex;
     justify-content: center;
@@ -12,12 +11,12 @@
     grid-gap: 30px; 
     max-width: 1080px; 
     width: 100%;
-    margin: 0 auto; /* Center gallery horizontally */
+    margin: 0 auto;
 }
 
 .gallery img {
     width: 100%;
-    height: auto; /* Maintain aspect ratio */
+    height: auto;
     border-radius: 10px;
     transition: transform 0.3s ease-in-out;
 }
@@ -26,39 +25,34 @@
     transform: scale(1.1);
 }
 
-/* Responsive layout for tablets and smaller screens */
 @media (max-width: 1024px) {
     .gallery {
         grid-template-columns: repeat(3, 1fr);
-        max-width: 600px; /* Adjust max-width for tablets */
+        max-width: 600px;
     }
 }
 
-/* Responsive layout for mobile phones */
 @media (max-width: 768px) {
     .gallery {
         grid-template-columns: repeat(2, 1fr);
-        max-width: 400px; /* Adjust max-width for mobile phones */
+        max-width: 400px;
     }
 }
 
-/* Responsive layout for very small screens */
 @media (max-width: 480px) {
     .gallery {
         grid-template-columns: 1fr;
-        max-width: 300px; /* Adjust max-width for very small screens */
+        max-width: 250px;
     }
 }
 
-/* Ensure paragraphs have adequate margin on mobile screens */
 .contact-us-blog p {
-    margin: 0 0 15px; /* Add bottom margin to paragraphs */
-    line-height: 1.6; /* Improve readability */
+    margin: 0 0 15px;
+    line-height: 1.6;
 }
 
-/* Additional padding for contact section on smaller screens */
 @media (max-width: 768px) {
     .contact-us-blog {
-        padding: 20px; /* Add padding to avoid overlap */
+        padding: 20px;
     }
 }
