@@ -1,39 +1,64 @@
-.row {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
+/* Styles for the image gallery */
+.body-blog {
     display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(-1* var(--bs-gutter-y));
-    margin-right: calc(-0.5* var(--bs-gutter-x));
-    margin-left: calc(-0.5* var(--bs-gutter-x));
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
 }
 
-.contact-us-blog:before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    width: 65%;
-    height: 100%;
-    /* background-color: #f1f0fe; */
-    content: '';
-    border-top-right-radius: 500px;
-    border-bottom-right-radius: 500px;
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px; 
+    max-width: 1080px; 
+    width: 100%;
+    margin: 0 auto; /* Center gallery horizontally */
 }
 
-.contact-us-blog {
-    margin-top: 80px;
-    position: relative;
-    padding: 50px 0px;
+.gallery img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
 }
 
-.contact-us-blog .section-heading {
-    margin-right: 110px;
-    margin-bottom: 0px;
+.gallery img:hover {
+    transform: scale(1.1);
 }
 
-.contact-us-blog .section-heading p {
-    margin-top: 50px;
+/* Responsive layout for tablets and smaller screens */
+@media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 600px; /* Adjust max-width for tablets */
+    }
+}
+
+/* Responsive layout for mobile phones */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 400px; /* Adjust max-width for mobile phones */
+    }
+}
+
+/* Responsive layout for very small screens */
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr;
+        max-width: 300px; /* Adjust max-width for very small screens */
+    }
+}
+
+/* Ensure paragraphs have adequate margin on mobile screens */
+.contact-us-blog p {
+    margin: 0 0 15px; /* Add bottom margin to paragraphs */
+    line-height: 1.6; /* Improve readability */
+}
+
+/* Additional padding for contact section on smaller screens */
+@media (max-width: 768px) {
+    .contact-us-blog {
+        padding: 20px; /* Add padding to avoid overlap */
+    }
 }
