@@ -8,7 +8,7 @@
 .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 30px; 
+    grid-gap: 15px; 
     max-width: 1080px; 
     width: 100%;
     margin: 0 auto;
@@ -24,6 +24,21 @@
 .gallery img:hover {
     transform: scale(1.1);
 }
+
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Adjust the padding as needed */
+}
+
+.centered-image {
+    max-width: 800px;
+    height: auto;
+    border-radius: 15px; /* Adjust the corner radius as needed */
+}
+
 
 @media (max-width: 1024px) {
     .gallery {
