@@ -72,6 +72,12 @@
     }
 }
 
+@media (min-width: 426px) {
+    .carousel {
+      display: none;
+    }
+  }
+
 .contact-us-blog p {
     margin: 0 0 15px;
     line-height: 1.6;
